@@ -1,9 +1,10 @@
-import style from './Main.style.scss';
+import MainSection from '../../components/MainSection';
+import style from './Main.module.scss';
 
 const Main = () => {
   return (
     <main className={style.main} data-testid="main">
-      <span></span>
+      <MainSection />
     </main>
   );
 };

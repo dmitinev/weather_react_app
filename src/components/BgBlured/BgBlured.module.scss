@@ -1,0 +1,16 @@
+.bgBlured {
+  backdrop-filter: blur(.5em);
+  background-color: hsla(0,0%,100%,.04);
+  position: relative;
+  grid-column: 3/5;
+}
+
+@media screen and (min-width: 65em) {
+  .bgBlured
+  {
+    border-block-start: none;
+    border-inline-start: 5px solid hsla(0,0%,100%,.14);
+    grid-column: 3/5;
+    grid-row: 1/3;
+  }
+}

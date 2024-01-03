@@ -14,7 +14,7 @@
       "withIndex": true,
       "customTemplates": {
         "component": "templates/default/TemplateName.js",
-        "style": "templates/default/TemplateName.style.scss",
+        "style": "templates/default/TemplateName.module.scss",
         "index": "templates/default/index.js"
       }
     },
@@ -22,7 +22,7 @@
       "path": "src/pages",
       "customTemplates": {
         "component": "templates/default/TemplateName.js",
-        "style": "templates/default/TemplateName.style.scss",
+        "style": "templates/default/TemplateName.module.scss",
         "index": "templates/default/index.js"
       }
     }

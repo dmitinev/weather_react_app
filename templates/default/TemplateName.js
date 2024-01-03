@@ -1,4 +1,4 @@
-import style from './TemplateName.style.scss';
+import style from './TemplateName.module.scss';
 
 const TemplateName = ({ props }) => {
   return (
