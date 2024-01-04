@@ -17,10 +17,18 @@
 }
 
 @media screen and (min-width: 45em) {
-  .main-
+  .main
   {
     grid-template-columns: minmax(2rem,1fr) clamp(41rem,90vw,45rem) minmax(2rem,1fr);
   }
 }
+
+@media screen and (min-width: 65em) {
+  .main {
+    grid-template-columns: minmax(2rem,1fr) minmax(0,43.3333333333em) minmax(0,21.6666666667em) minmax(2rem,1fr);
+    grid-template-rows: 2rem 1fr;
+  }
+}
+
 
 

@@ -1,9 +1,16 @@
 .mainSection {
-  aspect-ratio: unset;
   grid-column: 2;
   grid-row: 2;
   position: relative;
+  aspect-ratio: 5/3;
 }
 .mainSection_link {
   display: inline-flex;
+}
+
+@media screen and (min-width: 65em) {
+
+}
+.mainSection {
+  aspect-ratio: unset;
 }

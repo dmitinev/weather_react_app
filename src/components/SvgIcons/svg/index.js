@@ -8,6 +8,7 @@ export { Logo } from './Logo';
 export { MoonAndCloud } from './MoonAndCloud';
 export { RainDay } from './RainDay';
 export { RainNight } from './RainNight';
+export { Scroll } from './Scroll';
 export { Search } from './Search';
 export { Snow } from './Snow';
 export { Sun } from './Sun';

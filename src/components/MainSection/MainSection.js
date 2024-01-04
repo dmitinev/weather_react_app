@@ -1,5 +1,6 @@
 import BgBlured from '../BgBlured';
 import SvgIcon from '../SvgIcons';
+import WeatherInfo from '../WeatherInfo';
 import style from './MainSection.module.scss';
 
 const MainSection = () => {
@@ -9,6 +10,7 @@ const MainSection = () => {
         <a href="/" className={style.mainSection_link}>
           <SvgIcon type="Logo" />
         </a>
+        <WeatherInfo />
       </section>
       <BgBlured />
     </>

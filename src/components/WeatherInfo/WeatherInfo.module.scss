@@ -1,0 +1,46 @@
+.weatherInfo {
+  align-items: center;
+  bottom: clamp(1rem,4.3vw,2rem);
+  -moz-column-gap: clamp(.25rem,1.3vw,.5rem);
+  column-gap: clamp(0.25rem,1.3vw,0.5rem);
+  display: inline-grid;
+  grid-auto-flow: column;
+  left: 0;
+  line-height: 1.2;
+  position: absolute;
+  color: #fef5f5;
+}
+
+.weatherInfo__text {
+  font-size: 8.725rem;
+}
+
+.weatherInfo__celsius {
+  font-size: 8.725rem;
+  margin-left: -4px;
+}
+
+.weatherInfo__wrapper {
+  column-gap: calc(clamp(0.25rem, 1.3vw, 0.5rem)*2);
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr auto;
+}
+
+.weatherInfo__city {
+  font-weight: 400;
+  font-size: 3.75rem;
+}
+
+.weatherInfo__date {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+
+@media screen and (min-width: 65em) {
+  .weatherInfo {
+    bottom: 11%;
+  }
+}
+
