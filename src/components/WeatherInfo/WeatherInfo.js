@@ -9,7 +9,7 @@ const WeatherInfo = () => {
       <div className={style.weatherInfo__wrapper}>
         <h1 className={style.weatherInfo__city}>Ontario</h1>
         <p className={style.weatherInfo__date}>11:30 - Wed, 03 Jan 2024</p>
-        <SvgIcon type="CloudyIcon" />
+        <SvgIcon type="CloudyIcon" width="4.375rem" />
       </div>
     </article>
   );

@@ -1,6 +1,6 @@
-export const Search = () => (
+export const Search = ({ width }) => (
   <svg
-    width="28"
+    width={width}
     height="28"
     viewBox="0 0 28 28"
     fill="none"

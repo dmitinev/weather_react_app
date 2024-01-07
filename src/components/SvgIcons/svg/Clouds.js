@@ -1,6 +1,6 @@
-export const Clouds = () => (
+export const Clouds = ({ width }) => (
   <svg
-    width="32"
+    width={{ width }}
     height="32"
     viewBox="0 0 32 32"
     fill="none"

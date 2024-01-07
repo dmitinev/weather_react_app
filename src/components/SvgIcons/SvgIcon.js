@@ -1,8 +1,8 @@
 import * as Icons from './svg/index';
 
-const SvgIcon = ({ type }) => {
+const SvgIcon = ({ type, width }) => {
   const icon = Icons[type];
-  return <>{icon()}</>;
+  return <>{icon(width)}</>;
 };
 
 export default SvgIcon;

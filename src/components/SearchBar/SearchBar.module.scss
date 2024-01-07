@@ -1,0 +1,32 @@
+.searchBar {
+  align-items: center;
+  border-block-end: 1px solid #fff;
+  cursor: auto;
+  display: flex;
+  grid-column: 2/2;
+  grid-row: 2/2;
+  inset: 0 0 auto auto;
+  justify-content: space-between;
+  padding-block-end: 0.5rem;
+  color: #ffffff;
+  position: absolute;
+  &__search {
+    background: none;
+    border: none;
+    font-family: Roboto,sans-serif;
+    outline: none;
+    font-size: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .searchBar {
+    grid-column: unset;
+    grid-row: unset;
+    position: relative;
+  }
+  .searchBar__search {
+    width: unset;
+  }
+}
+

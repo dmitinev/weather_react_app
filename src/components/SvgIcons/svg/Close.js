@@ -1,6 +1,6 @@
-export const Close = () => (
+export const Close = ({ width }) => (
   <svg
-    width="24"
+    width={width}
     height="24"
     viewBox="0 0 24 24"
     fill="none"

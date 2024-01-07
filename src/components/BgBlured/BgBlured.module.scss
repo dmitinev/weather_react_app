@@ -2,7 +2,8 @@
   backdrop-filter: blur(.5em);
   background-color: hsla(0,0%,100%,.04);
   position: relative;
-  grid-column: 3/5;
+  grid-column: 1/4;
+  grid-row: 3;
 }
 
 @media screen and (min-width: 65em) {
