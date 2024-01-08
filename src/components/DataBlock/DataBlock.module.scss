@@ -1,0 +1,34 @@
+.dataBlock {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr repeat(2,3rem);
+  width: clamp(18rem,70vw,20rem);
+  font-size: 1.125rem;
+  &:not(:first-child) {
+    margin-top: 2em;
+  }
+  &__label {
+    color: hsla(0,0%,100%,.7);
+
+  }
+  &__num {
+    justify-self: end;
+  }
+  &__img {
+    justify-self: end;
+    display: inline-flex;
+  }
+}
+
+@media screen and (min-width: 45em) {
+  .dataBlock {
+    width: 26rem;
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .dataBlock {
+    width: unset;
+  }
+}
+

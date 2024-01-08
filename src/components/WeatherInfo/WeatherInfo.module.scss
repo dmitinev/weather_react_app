@@ -9,6 +9,13 @@
   line-height: 1.2;
   position: absolute;
   color: #fef5f5;
+  &__wimage {
+    align-self: end;
+    grid-column: 2;
+    grid-row: span 2;
+    min-width: 70px;
+    min-height: 70px;
+  }
 }
 
 .weatherInfo__text {

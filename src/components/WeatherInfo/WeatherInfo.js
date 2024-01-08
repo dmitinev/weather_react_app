@@ -1,4 +1,3 @@
-import SvgIcon from '../SvgIcons';
 import style from './WeatherInfo.module.scss';
 
 const WeatherInfo = () => {
@@ -9,7 +8,11 @@ const WeatherInfo = () => {
       <div className={style.weatherInfo__wrapper}>
         <h1 className={style.weatherInfo__city}>Ontario</h1>
         <p className={style.weatherInfo__date}>11:30 - Wed, 03 Jan 2024</p>
-        <SvgIcon type="CloudyIcon" width="4.375rem" />
+        <img
+          className={style.weatherInfo__wimage}
+          src="https://cdn.weatherapi.com/weather/64x64/day/356.png"
+          alt="weather icon"
+        />
       </div>
     </article>
   );

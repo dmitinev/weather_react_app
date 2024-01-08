@@ -18,9 +18,8 @@
 @media screen and (min-width: 65em) {
   .asideBar {
     height: calc(100vh - 3rem);
-    justify-content: stretch;
+    justify-content: end;
     margin-block-start: 0;
-    padding-inline-start: 3rem;
     grid-column: 3;
     grid-row: 2;
   }

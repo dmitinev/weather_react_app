@@ -1,10 +1,10 @@
 import './App.scss';
-import cloudsNight from './assets/bg/clouds-night.jpg';
+import rain from './assets/bg/rain.jpg';
 import Main from './pages/Main';
 
 function App() {
   return (
-    <div className="App" style={{ backgroundImage: `url("${cloudsNight}")` }}>
+    <div className="App" style={{ backgroundImage: `url("${rain}")` }}>
       <Main />
     </div>
   );

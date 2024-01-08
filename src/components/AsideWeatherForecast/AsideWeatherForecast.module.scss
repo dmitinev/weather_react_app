@@ -1,0 +1,19 @@
+.asideWeatherForecast {
+  border-block-start: 1px solid #ffffff;
+  padding-block-end: 5rem;
+  padding-block-start: 3rem;
+  color: #fff;
+  z-index: 3;
+  font-family: "Roboto", sans-serif;
+  &__heading {
+    font-weight: 400;
+    margin-block-end: 3rem;
+    font-size: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .asideWeatherForecast__heading {
+    text-align: start;
+  }
+}

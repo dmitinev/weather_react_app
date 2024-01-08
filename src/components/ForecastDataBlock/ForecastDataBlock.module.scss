@@ -1,0 +1,31 @@
+.ForecastDataBlock {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2,clamp(4rem,10vw,5rem)) 1fr;
+  font-size: 1.125rem;
+  width: unset;
+  &:not(:first-child) {
+    margin-top: 2em;
+  }
+  &__desc {
+    justify-self: start;
+  }
+  &__conditions {
+    color: hsla(0,0%,100%,.7);
+  }
+  &__temp {
+    justify-self: end;
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .ForecastDataBlock {
+    width: unset;
+  }
+}
+@media screen and (min-width: 45em) {
+  .ForecastDataBlock {
+    width: 26rem;
+  }
+}
+
