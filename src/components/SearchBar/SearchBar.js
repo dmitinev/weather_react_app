@@ -4,7 +4,7 @@ import SvgIcon from '../SvgIcons';
 import style from './SearchBar.module.scss';
 
 const SearchBar = () => {
-  const { locationCity } = useContext(WeatherContext);
+  const { locationCity, searchHandler } = useContext(WeatherContext);
   const [value, setValue] = useState('');
 
   useEffect(() => {
@@ -15,7 +15,11 @@ const SearchBar = () => {
   };
 
   return (
-    <form className={style.searchBar} data-testid="searchBar">
+    <form
+      onSubmit={searchHandler}
+      className={style.searchBar}
+      data-testid="searchBar"
+    >
       <input
         type="text"
         placeholder="Search Location..."
@@ -25,7 +29,9 @@ const SearchBar = () => {
         value={value}
         onChange={changeHandler}
       />
-      <SvgIcon type="Search" width="1.75rem" />
+      <button className={style.searchBar__submitBtn} type="submit">
+        <SvgIcon type="Search" width="1.75rem" />
+      </button>
     </form>
   );
 };

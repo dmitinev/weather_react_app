@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { createContext, useEffect, useMemo, useState } from 'react';
+const { REACT_APP_WEATHERAPI_KEY } = process.env;
 
-const BASE_URL_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHERAPI_KEY}`;
+const BASE_URL_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${REACT_APP_WEATHERAPI_KEY}`;
+const BASE_URL_FORECAST = `https://api.weatherapi.com/v1/forecast.json?key=${REACT_APP_WEATHERAPI_KEY}`;
 
 export const WeatherContext = createContext(null);
 
@@ -10,45 +12,125 @@ const WeatherContextProvider = ({ children }) => {
     latitude: undefined,
     longitude: undefined,
   });
-  const [city, setCity] = useState('London');
+  const [city, setCity] = useState('');
   const [currentWeather, setCurrentWeather] = useState({});
+  const [currentForecast, setCurrentForecast] = useState([]);
+  const [dataIsLoading, setDataIsLoading] = useState(false);
+  const [errorPresent, setErrorPresent] = useState({
+    isPresent: false,
+    msg: '',
+  });
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setLocation({ latitude, longitude });
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+        },
+        () => {
+          console.warn('Geolocation request is denied');
+          setCity('London');
+        },
+      );
     } else {
-      console.error('Geolocation is not supported by this browser.');
+      console.warn('Geolocation is not supported by this browser.');
+      setCity('London');
     }
   }, []);
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
-      setCity('');
+      setDataIsLoading(true);
+      const requestsArr = [
+        axios(
+          BASE_URL_WEATHER + `&q=${location.latitude},${location.longitude}`,
+        ),
+        axios(
+          BASE_URL_FORECAST + `&q=${location.latitude},${location.longitude}`,
+        ),
+      ];
+      Promise.all(requestsArr)
+        .then((results) => {
+          setCity(results[0].data.location.name);
+          setCurrentWeather(results[0].data.current);
+          setCurrentForecast(results[1].data.forecast.forecastday[0].hour);
+          setDataIsLoading(false);
+        })
+        .catch(() => {
+          setDataIsLoading(false);
+          setErrorPresent({
+            isPresent: true,
+            msg: 'No matching location found',
+          });
+        });
     }
   }, [location]);
 
   useEffect(() => {
-    if (location.latitude && location.longitude) {
-      axios(
-        BASE_URL_WEATHER + `&q=${location.latitude},${location.longitude}`,
-      ).then(({ data }) => {
-        setCity(data.location.name);
-        setCurrentWeather(data.current);
-        console.log(data);
-      });
+    if (!location.latitude && !location.longitude && city !== '') {
+      setDataIsLoading(true);
+      const requestsArr = [
+        axios(BASE_URL_WEATHER + `&q=${city}&aqi=no`),
+        axios(BASE_URL_FORECAST + `&q=${city}&aqi=no`),
+      ];
+      Promise.all(requestsArr)
+        .then((results) => {
+          setCurrentWeather(results[0].data.current);
+          setCurrentForecast(results[1].data.forecast.forecastday[0].hour);
+          setDataIsLoading(false);
+        })
+        .catch(() => {
+          setDataIsLoading(false);
+          setErrorPresent({
+            isPresent: true,
+            msg: 'No matching location found',
+          });
+        });
     }
-  }, [location]);
+  }, [location, city]);
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+    setDataIsLoading(true);
+    const requestArr = [
+      axios(BASE_URL_WEATHER + `&q=${e.target[0].value}}&aqi=no`),
+      axios(BASE_URL_FORECAST + `&q=${e.target[0].value}&aqi=no`),
+    ];
+    Promise.all(requestArr)
+      .then((results) => {
+        setCity(results[0].data.location.name);
+        setCurrentWeather(results[0].data.current);
+        setCurrentForecast(results[1].data.forecast.forecastday[0].hour);
+        setDataIsLoading(false);
+      })
+      .catch(() => {
+        setDataIsLoading(false);
+        setErrorPresent({
+          isPresent: true,
+          msg: 'No matching location found',
+        });
+      });
+  };
 
   const contextValue = useMemo(() => {
     return {
       geoLocation: location,
       locationCity: city,
       currentWeather: currentWeather,
+      currentForecast: currentForecast,
+      dataIsLoading: dataIsLoading,
+      errorPresent: errorPresent,
+      searchHandler: searchHandler,
     };
-  }, [location, city, currentWeather]);
+  }, [
+    location,
+    city,
+    currentWeather,
+    currentForecast,
+    dataIsLoading,
+    errorPresent,
+  ]);
 
   return (
     <WeatherContext.Provider value={contextValue}>

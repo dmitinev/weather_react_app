@@ -18,6 +18,9 @@
     font-size: 1.125rem;
     width: 80%;
   }
+  &__submitBtn {
+    cursor: pointer;
+  }
 }
 
 @media screen and (min-width: 65em) {
