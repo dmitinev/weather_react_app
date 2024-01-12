@@ -16,6 +16,7 @@ const WeatherContextProvider = ({ children }) => {
   const [currentWeather, setCurrentWeather] = useState({});
   const [currentForecast, setCurrentForecast] = useState([]);
   const [dataIsLoading, setDataIsLoading] = useState(false);
+  const [isGeoLocationReceiving, setIsGeoLocationReceiving] = useState(false);
   const [errorPresent, setErrorPresent] = useState({
     isPresent: false,
     msg: '',
@@ -23,19 +24,23 @@ const WeatherContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (navigator.geolocation) {
+      setIsGeoLocationReceiving(true);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
+          setIsGeoLocationReceiving(false);
         },
         () => {
           console.warn('Geolocation request is denied');
           setCity('London');
+          setIsGeoLocationReceiving(false);
         },
       );
     } else {
       console.warn('Geolocation is not supported by this browser.');
       setCity('London');
+      setIsGeoLocationReceiving(false);
     }
   }, []);
 
@@ -122,6 +127,7 @@ const WeatherContextProvider = ({ children }) => {
       dataIsLoading: dataIsLoading,
       errorPresent: errorPresent,
       searchHandler: searchHandler,
+      isGeoLocationReceiving: isGeoLocationReceiving,
     };
   }, [
     location,
@@ -130,6 +136,7 @@ const WeatherContextProvider = ({ children }) => {
     currentForecast,
     dataIsLoading,
     errorPresent,
+    isGeoLocationReceiving,
   ]);
 
   return (

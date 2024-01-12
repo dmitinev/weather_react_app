@@ -1,0 +1,22 @@
+.weatherInfoSkeleton {
+  bottom: clamp(1rem,4.3vw,2rem);
+  display: flex;
+  left: 0;
+  position: absolute;
+  color: #fef5f5;
+  &__loader {
+    width: 250px;
+  }
+}
+
+
+@media screen and (min-width: 65em) {
+  .weatherInfoSkeleton {
+    bottom: 11%;
+    &__loader {
+      width: 500px;
+    }
+  }
+}
+
+
