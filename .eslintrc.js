@@ -27,6 +27,7 @@ module.exports = {
 
   plugins: ['react'],
   rules: {
+    'no-unsafe-optional-chaining': 'warn',
     'no-undef': 'warn',
     'no-unused-vars': 'warn',
     'react/prop-types': 'off',
