@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { createContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 const { REACT_APP_WEATHERAPI_KEY } = process.env;
 
 const BASE_URL_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${REACT_APP_WEATHERAPI_KEY}`;
@@ -59,7 +65,7 @@ const WeatherContextProvider = ({ children }) => {
         .then((results) => {
           setCity(results[0].data.location.name);
           setCurrentWeather(results[0].data.current);
-          setCurrentForecast(results[1].data.forecast.forecastday[0].hour);
+          setCurrentForecast(results[1].data.forecast.forecastday[0]);
           setDataIsLoading(false);
         })
         .catch(() => {
@@ -82,7 +88,7 @@ const WeatherContextProvider = ({ children }) => {
       Promise.all(requestsArr)
         .then((results) => {
           setCurrentWeather(results[0].data.current);
-          setCurrentForecast(results[1].data.forecast.forecastday[0].hour);
+          setCurrentForecast(results[1].data.forecast.forecastday[0]);
           setDataIsLoading(false);
         })
         .catch(() => {
@@ -95,7 +101,7 @@ const WeatherContextProvider = ({ children }) => {
     }
   }, [location, city]);
 
-  const searchHandler = (e) => {
+  const searchHandler = useCallback((e) => {
     e.preventDefault();
     setDataIsLoading(true);
     const requestArr = [
@@ -106,7 +112,7 @@ const WeatherContextProvider = ({ children }) => {
       .then((results) => {
         setCity(results[0].data.location.name);
         setCurrentWeather(results[0].data.current);
-        setCurrentForecast(results[1].data.forecast.forecastday[0].hour);
+        setCurrentForecast(results[1].data.forecast.forecastday[0]);
         setDataIsLoading(false);
       })
       .catch(() => {
@@ -116,7 +122,7 @@ const WeatherContextProvider = ({ children }) => {
           msg: 'No matching location found',
         });
       });
-  };
+  }, []);
 
   const contextValue = useMemo(() => {
     return {

@@ -8,7 +8,7 @@ const ForecastDataBlock = ({ imgUrl, time, conditions, num }) => {
         <p>{time}</p>
         <p className={style.ForecastDataBlock__conditions}>{conditions}</p>
       </div>
-      <p className={style.ForecastDataBlock__temp}>{num}</p>
+      <p className={style.ForecastDataBlock__temp}>{num}°</p>
     </div>
   );
 };
@@ -17,7 +17,7 @@ ForecastDataBlock.defaultProps = {
   imgUrl: 'https://cdn.weatherapi.com/weather/64x64/night/176.png',
   time: '21:00',
   conditions: 'Clouds',
-  num: '2°',
+  num: '2',
 };
 
 export default ForecastDataBlock;

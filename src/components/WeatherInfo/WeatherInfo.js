@@ -4,7 +4,6 @@ import style from './WeatherInfo.module.scss';
 
 const WeatherInfo = () => {
   const { currentWeather, locationCity } = useContext(WeatherContext);
-  console.log(currentWeather);
   return (
     <article className={style.weatherInfo} data-testid="weatherInfo">
       <p className={style.weatherInfo__text}>{currentWeather.temp_c}</p>
