@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { getBackGroundImage } from '../../helpers/getBackGroundImage';
 const { REACT_APP_WEATHERAPI_KEY } = process.env;
 
 const BASE_URL_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${REACT_APP_WEATHERAPI_KEY}`;
@@ -19,6 +20,7 @@ const WeatherContextProvider = ({ children }) => {
     longitude: undefined,
   });
   const [city, setCity] = useState('');
+  const [url, setUrl] = useState('');
   const [currentWeather, setCurrentWeather] = useState({});
   const [currentForecast, setCurrentForecast] = useState([]);
   const [dataIsLoading, setDataIsLoading] = useState(false);
@@ -101,6 +103,14 @@ const WeatherContextProvider = ({ children }) => {
     }
   }, [location, city]);
 
+  useEffect(() => {
+    const url = getBackGroundImage(
+      currentWeather.condition?.text,
+      currentWeather.last_updated?.split(' ')[1],
+    );
+    setUrl(url);
+  }, [currentWeather]);
+
   const searchHandler = useCallback((e) => {
     e.preventDefault();
     setDataIsLoading(true);
@@ -134,6 +144,7 @@ const WeatherContextProvider = ({ children }) => {
       errorPresent: errorPresent,
       searchHandler: searchHandler,
       isGeoLocationReceiving: isGeoLocationReceiving,
+      backgroundImageUrl: url,
     };
   }, [
     location,
@@ -143,6 +154,7 @@ const WeatherContextProvider = ({ children }) => {
     dataIsLoading,
     errorPresent,
     isGeoLocationReceiving,
+    url,
   ]);
 
   return (
